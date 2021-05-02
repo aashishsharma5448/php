@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <title>use callback functions</title>
+    </head>
+    
+    <body>
+        <button type="button" onclick="getmethod('ajax_info.txt',getfunction)">Use Get Method</button>
+        <button type="button" onclick="postmethod('ajax_info.txt',postfunction)">Use Post Method</button>
+        
+        <p id="getpara">This text shows by Get Method: </p>
+        <p id="postpara">This text shows by Post Method: </p>
+        
+        <script>
+            function getfunction(xhttp){
+                document.getElementById("getpara").innerHTML = xhttp.responseText;
+            }
+            function postfunction(xhttp){
+                document.getElementById("postpara").innerHTML = xhttp.responseText;
+            }
+            
+            function getmethod(url,functionused){
+                var getvar = new XMLHttpRequest();
+                getvar.onreadystatechange = function(){
+                     if (this.readyState == 4 && this.status==200){
+                         functionused(this);
+                     }
+                };
+                getvar.open("GET",url,true);
+                getvar.send();
+            }
+            
+            
+            function postmethod(url,functionused){
+                var postvar = new XMLHttpRequest();
+                postvar.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200){
+                        functionused(this);
+                    }
+                };
+                
+                postvar.open("POST",url,true);
+                postvar.send();
+            }
+        </script>
+    </body>
+</html>

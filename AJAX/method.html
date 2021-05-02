@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <title> use the methods in AJAX</title>
+    </head>
+    
+    <body>
+        
+        <!--   buttons to to fetch the methods via AJAX -->
+        <button type="button" onclick="loadget()">Get button</button>
+        <button type="button" onclick="loadpost()">Post button</button>
+        
+        
+       <!--to show the text document which is fetched by get or post methods -->
+        <p id="getmethod"></p>
+        <p id="postmethod"></p>
+        
+        <!-- AJAX code -->
+        
+        <script>
+            function loadget() {
+              var getvar = new XMLHttpRequest();
+              getvar.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                  document.getElementById("getmethod").innerHTML = this.responseText;
+                }
+              };
+              getvar.open("GET", "ajax_info.txt", true);
+              getvar.send();
+            }
+            
+            function loadpost() {
+                var postvar = new XMLHttpRequest();
+                postvar.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("postmethod").innerHTML = this.responseText;
+                    }
+                };
+                
+                postvar.open("POST","ajax_info.txt",true);
+                postvar.send();
+            }
+            
+        </script>
+    </body>
+</html>
